@@ -46,4 +46,6 @@ nix-channel --update
 
 I can now temporarily install Zola using `nix-shell -p zola`. I initialized everything with `zola init`.
 I then follow [Zola's guide](https://www.getzola.org/documentation/getting-started/overview/) to set up some basic pages.
-After getting this page and a couple other pages working, it was time to deploy :smile:
+After getting this page and a couple other pages working, it was time to deploy :smile:.
+
+First, I created `.github/workflows/main.yml` as suggested by https://www.getzola.org/documentation/deployment/github-pages/.

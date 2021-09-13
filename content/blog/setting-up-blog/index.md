@@ -66,4 +66,4 @@ Finally, I added two cname records in NameCheap
 | `@`    | `thenumberone.github.io.` |
 | `www`  | `thenumberone.github.io.` |
 
-After waiting around 20 mintutes, this website was working!
+After waiting around 20 minutes, this website was working!

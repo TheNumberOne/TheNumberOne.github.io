@@ -17,7 +17,7 @@ After some research, I decided to go with [Zola](https://www.getzola.org/documen
   * It seems feature rich and easy to use.
   * It is the most starred static generator written in Rust.
     
-To start, I clone my super old git pages repository from 2017.
+To start, I cloned my super old git pages repository from 2017.
 
 ```sh
 git clone https://github.com/TheNumberOne/TheNumberOne.github.io
@@ -45,7 +45,25 @@ nix-channel --update
 ```
 
 I can now temporarily install Zola using `nix-shell -p zola`. I initialized everything with `zola init`.
-I then follow [Zola's guide](https://www.getzola.org/documentation/getting-started/overview/) to set up some basic pages.
+I then followed [Zola's guide](https://www.getzola.org/documentation/getting-started/overview/) to set up some basic pages.
 After getting this page and a couple other pages working, it was time to deploy :smile:.
 
-First, I created `.github/workflows/main.yml` as suggested by https://www.getzola.org/documentation/deployment/github-pages/.
+First, I created `.github/workflows/main.yml` as suggested by <https://www.getzola.org/documentation/deployment/github-pages/>.
+I then created a github token to add to my repository's secrets, and not too long after I had this website working on github pages.
+
+## Custom Domain
+
+Next, I wanted to setup a custom domain.
+First, I bought `thenumeral.one` from [NameCheap](https://www.namecheap.com>).
+Then, I changed the github page settings to use my domain.
+
+![Github page settings of my repository with the custom domain field being set to thenumeral.one](github-pages-screenshot.png)
+
+Finally, I added two cname records in NameCheap
+
+| Host   | Value                     |
+| ------ | ------------------------- |
+| `@`    | `thenumberone.github.io.` |
+| `www`  | `thenumberone.github.io.` |
+
+After waiting around 20 mintutes, this website was working!

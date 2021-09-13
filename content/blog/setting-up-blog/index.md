@@ -25,7 +25,7 @@ git branch main
 git checkout main
 ```
 
-To install Zola, I want to use Nix. So, I first installed Nix:
+To install Zola, I wanted to use Nix. So, I first installed Nix:
 
 ```sh
 paru -Syu nix

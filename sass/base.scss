@@ -1,0 +1,40 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 1em;
+
+	&.dark-theme {
+		background: #131516;
+		color: #d8d4cf;
+
+		a {
+			color: #3391ff;
+		}
+	}
+}
+
+
+.site-header, main {
+	max-width: 50em;
+	margin: 0 auto;
+}
+
+pre {
+	overflow-x: scroll;
+}
+
+.site-nav-list {
+	list-style-type: none;
+	padding: 0;
+
+	li {
+		display: inline;
+
+		&:not(:first-child)::before {
+			content: ' | '
+		}
+	}
+}

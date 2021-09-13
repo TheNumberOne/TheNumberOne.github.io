@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %} Numeral {% endblock %}</title>
+  <link rel="stylesheet" href="{{ get_url(path="base.css") }}">
+</head>
+
+{% set root = get_section(path="_index.md", metadata_only=true) %}
+
+<body class="dark-theme">
+	<header class='site-header'>
+		<nav>
+			<ul class='site-nav-list'>
+				<li><a href="{{ root.permalink | safe }}">Numeral</a></li>
+
+				{% for section_path in root.subsections %}
+  				{% set section = get_section(path=section_path, metadata_only=true) %}
+  				<li><a href="{{ section.permalink | safe }}">{{ section.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</nav>
+	</header>
+	<main>
+		{% block content %} {% endblock %}
+	</main>
+</body>
+
+</html>

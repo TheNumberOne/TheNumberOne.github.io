@@ -1,5 +1,0 @@
-#F76D61: pastel red
-#F9C3BB: spanish pink
-#FCE8D9: moccasin
-#88A40F: apple green
-#BDC89C: sage

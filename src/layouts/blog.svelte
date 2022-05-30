@@ -12,9 +12,9 @@
 </script>
 
 <article>
-	<h1 class="title">
+	<h1>
 		{ title }
 	</h1>
-	<p class="subtitle"><strong>{ defaultDateFormat.format(new Date(date)) }</strong></p>
+	<p class="font-bold">{ defaultDateFormat.format(new Date(date)) }</p>
 	<slot />
 </article>

@@ -1,9 +1,11 @@
 ---
-title: "Setting Up This Website"
+title: Setting Up This Website
 date: 2021-09-12
 ---
 
-
+<script lang="ts">
+  import githubPagesScreenshot from './github-pages-screenshot.png'
+</script>
 
 ## Inspiration
 
@@ -59,7 +61,7 @@ Next, I wanted to setup a custom domain.
 First, I bought `thenumeral.one` from [NameCheap](https://www.namecheap.com>).
 Then, I changed the github page settings to use my domain.
 
-![Github page settings of my repository with the custom domain field being set to thenumeral.one](github-pages-screenshot.png)
+![Github page settings of my repository with the custom domain field being set to thenumeral.one]({githubPagesScreenshot})
 
 Finally, I added two cname records in NameCheap
 

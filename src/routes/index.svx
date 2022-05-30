@@ -7,5 +7,5 @@ title: Index
 Hi, this is my personal site.
 
 * Name: Rosetta or Numeral (no preference)
-* Contact: rosettafroberts@gmail.com
+* Contact: contact@thenumeral.one
 * [Github](https://github.com/TheNumberOne)

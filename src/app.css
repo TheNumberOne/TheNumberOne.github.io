@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply dark:bg-neutral-900 dark:text-gray-300;
+  }
+
   a {
-    @apply text-blue-600 underline;
+    @apply text-blue-600 underline dark:text-blue-400;
   }
 
   h1 {
@@ -28,7 +32,7 @@
   }
 
   thead {
-    @apply border-grey-700 border-b;
+    @apply border-grey-700 border-b dark:border-grey-300;
   }
 
   th {
@@ -40,7 +44,7 @@
     @apply text-center;
 
     &:not(:first-child) {
-      @apply border-dashed border-l border-grey-700;
+      @apply border-dashed border-l border-grey-700 dark:border-grey-300;
     }
   }
 }

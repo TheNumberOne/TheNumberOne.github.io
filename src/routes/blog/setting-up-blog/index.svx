@@ -1,6 +1,7 @@
 ---
 title: Setting Up This Website
 date: 2021-09-12
+description: Setting up this website using Zola and Github pages.
 ---
 
 <script lang="ts">

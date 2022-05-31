@@ -7,7 +7,7 @@
 	];
 </script>
 
-<header class='max-w-screen-md mx-auto'>
+<header class='max-w-screen-md mx-auto px-4'>
 	<nav>
 		<ul class='list-none'>
 			{#each navItems as [path, name], i}
@@ -22,6 +22,6 @@
 	</nav>
 </header>
 
-<main class='max-w-screen-md mx-auto'>
+<main class='max-w-screen-md mx-auto px-4'>
 	<slot />
 </main>

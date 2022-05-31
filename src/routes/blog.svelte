@@ -1,27 +1,30 @@
-<script type='module' lang='ts'>
-	import { sortBy } from '../lib/util/sortBy';
-	import { defaultDateFormat } from '../lib/const/dateFormat';
-	import Base from '$layouts/base.svelte';
+<script type="module" lang="ts">
+  import { sortBy } from '../lib/util/sortBy'
+  import { defaultDateFormat } from '../lib/const/dateFormat'
+  import Base from '$layouts/base.svelte'
 
-	function stripPath(path: string): string {
-		return path.replace(/(?:\/index)?\.svx$/, '');
-	}
+  function stripPath(path: string): string {
+    return path.replace(/(?:\/index)?\.svx$/, '')
+  }
 
-	const files: Record<string,
-		{ metadata: { date: string; title: string } }> = import.meta.globEager('./blog/*{,/*}.svx');
+  const files: Record<string, { metadata: { date: string; title: string } }> =
+    import.meta.globEager('./blog/*{,/*}.svx')
 
-	const filesAsList = Object.entries(files).map(([path, imported]) => ({ path, ...imported }));
+  const filesAsList = Object.entries(files).map(([path, imported]) => ({ path, ...imported }))
 
-	const sortedFiles = sortBy(filesAsList, (file) => file.metadata.date);
+  const sortedFiles = sortBy(filesAsList, (file) => file.metadata.date)
 </script>
 
-<Base title='Blog' description="A blog for Numeral's ramblings">
-	<h1 class='title'>Blog</h1>
+<Base title="Blog" description="A blog for Numeral's ramblings">
+  <h1 class="title">Blog</h1>
 
-	<ul>
-		{#each sortedFiles as file}
-			<li><a href={stripPath(file.path)}>{defaultDateFormat.format(new Date(file.metadata.date))}
-				- {file.metadata.title}</a></li>
-		{/each}
-	</ul>
+  <ul>
+    {#each sortedFiles as file}
+      <li>
+        <a href={stripPath(file.path)}>
+          {defaultDateFormat.format(new Date(file.metadata.date))} - {file.metadata.title}
+        </a>
+      </li>
+    {/each}
+  </ul>
 </Base>

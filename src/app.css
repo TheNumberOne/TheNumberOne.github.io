@@ -16,10 +16,20 @@
   }
 
   h2 {
-    @apply text-3xl
+    @apply text-3xl;
   }
 
-  ol, ul, h1, h2, h3, h4, h5, h6, p, hr, pre {
+  ol,
+  ul,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  hr,
+  pre {
     @apply my-4;
   }
 

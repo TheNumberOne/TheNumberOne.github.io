@@ -4,15 +4,15 @@
   import Base from '$layouts/base.svelte'
 
   function stripPath(path: string): string {
-    return path.replace(/(?:\/index)?\.svx$/, '')
+    return path.replace(/(?:\/index)?\.(?:svx|svelte)$/, '')
   }
 
   const files: Record<string, { metadata: { date: string; title: string } }> =
-    import.meta.globEager('./blog/*{,/*}.svx')
+    import.meta.globEager('./blog/*{,/*}.{svx,svelte}')
 
   const filesAsList = Object.entries(files).map(([path, imported]) => ({ path, ...imported }))
 
-  const sortedFiles = sortBy(filesAsList, (file) => file.metadata.date)
+  const sortedFiles = sortBy(filesAsList, (file) => file.metadata.date).reverse()
 </script>
 
 <Base title="Blog" description="A blog for Numeral's ramblings">

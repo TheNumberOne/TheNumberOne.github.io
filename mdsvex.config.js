@@ -4,7 +4,7 @@ const config = defineConfig({
   extensions: ['.svx'],
   layout: {
     _: './src/layouts/base.svelte',
-    blog: './src/layouts/blog.svelte'
+    blog: './src/layouts/+page.svelte'
   },
   smartypants: {
     dashes: 'oldschool'

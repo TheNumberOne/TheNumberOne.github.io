@@ -7,9 +7,11 @@
 </script>
 
 <script lang='ts'>
-  import { calculateBonus, type Configuration } from '../../lib/lbr/tradeDeliveryCalculator'
-  import Blog from '$layouts/blog.svelte'
-  import { percentFormat } from '../../lib/const/percentFormat'
+  import { calculateBonus, type Configuration } from '../../../lib/lbr/tradeDeliveryCalculator'
+  import Blog from '../../../layouts/blog.svelte'
+  import { percentFormat } from '../../../lib/const/percentFormat'
+  import { typedEntries } from '../../../lib/util/typedEntries.js'
+  import { typedKeys } from '../../../lib/util/typedKeys.js'
 
   let configuration: Configuration = {
     options: {
@@ -59,9 +61,9 @@
     <legend>
       Upgrades purchased or active:
     </legend>
-    {#each Object.entries(configuration.options) as [option, enabled] }
+    {#each typedEntries(configuration.options) as [option, enabled] }
       <input id={option} type='checkbox' checked={enabled}
-             on:change={(e) => configuration.options[option] = e.target.checked} />
+             on:change={(e) => configuration.options[option] = e.currentTarget.checked} />
       <label for={option}>
         {camelCaseToCapitalizedWords(option)}
       </label>
@@ -72,10 +74,10 @@
     <legend>
       Active pets and leaves:
     </legend>
-    {#each Object.entries(configuration.equipped) as [equipment, { active, upgrades }] }
+    {#each typedEntries(configuration.equipped) as [equipment, { active, upgrades }] }
       <div class='my-1'>
         <input id={equipment} type='checkbox' checked={active}
-               on:change={(e) => configuration.equipped[equipment].active = e.target.checked} />
+               on:change={(e) => configuration.equipped[equipment].active = e.currentTarget.checked} />
         <label for={equipment}>
           {camelCaseToCapitalizedWords(equipment)}
         </label>
@@ -85,7 +87,7 @@
           type='number'
           min='0' max='150'
           value={upgrades}
-          on:change={(e) => configuration.equipped[equipment].upgrades = e.target.value}
+          on:change={(e) => configuration.equipped[equipment].upgrades = Number(e.currentTarget.value)}
         />
       </div>
     {/each}
@@ -101,16 +103,16 @@
     Total contributions:
   </p>
   <ul>
-    {#each Object.keys(configuration.options) as option }
+    {#each typedKeys(configuration.options) as option }
       <li>
         {camelCaseToCapitalizedWords(option)}:
         {percentFormat.format(tradeBonus.contribution.options[option])}
       </li>
     {/each}
-    {#each Object.keys(configuration.equipped) as equip }
+    {#each typedKeys(configuration.equipped) as equip }
       <li>
         {camelCaseToCapitalizedWords(equip)}:
-        {percentFormat.format(tradeBonus.contribution.equipped[equip].toString())}
+        {percentFormat.format(tradeBonus.contribution.equipped[equip]).toString()}
         ({percentFormat.format(tradeBonus.upgradeContribution[equip])} per upgrade)
       </li>
     {/each}

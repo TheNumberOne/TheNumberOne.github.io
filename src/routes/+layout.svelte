@@ -3,13 +3,14 @@
 
   const navItems = [
     ['/', 'Numeral'],
-    ['/blog', 'Blog']
+    ['/blog', 'Blog'],
+    ['/ideas', 'Ideas']
   ]
 </script>
 
 <header class="max-w-screen-md mx-auto px-4">
   <nav>
-    <ul class="list-none">
+    <ul class="list-none mx-0">
       {#each navItems as [path, name], i}
         <li class="inline">
           {#if i !== 0}

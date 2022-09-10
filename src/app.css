@@ -61,4 +61,14 @@
   input {
     @apply bg-inherit;
   }
+
+  ul {
+    @apply ml-3;
+
+    list-style-type: '- ';
+  }
+
+  li > ul {
+    @apply my-0;
+  }
 }

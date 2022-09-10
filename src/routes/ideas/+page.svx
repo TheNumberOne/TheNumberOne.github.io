@@ -1,0 +1,16 @@
+---
+title: Ideas
+description: Personal website of Rosetta Roberts.
+---
+
+# Project Ideas
+
+Hi, this is a list of project ideas that I have had that I haven't started on yet.
+
+* Manim visualization of the finiteness of all computable numbers.
+* Accessibility toolkit for Svelte.
+    * Requires a literature review of accessibility functionality in native GUI toolkits first.
+* Set up a useful neovim configuration for software development.
+* Nix syntax highlighting for Vim.
+* Figure out how to mod Leaf Blower Revolution.
+* Figure out how to TAS Leaf Blower Revolution.

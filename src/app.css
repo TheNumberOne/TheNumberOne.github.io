@@ -1,3 +1,5 @@
+@import "prism-themes/themes/prism-a11y-dark.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,6 +13,18 @@
     @apply text-blue-600 underline dark:text-blue-400;
   }
 
+  blockquote {
+    @apply p-4 border-l-2 border-red-600 dark:bg-neutral-800 bg-neutral-100 rounded-r;
+  }
+  
+  dd {
+    @apply ml-4;
+  }
+  
+  dt {
+    @apply font-bold;
+  }
+
   h1 {
     @apply text-4xl;
   }
@@ -18,7 +32,14 @@
   h2 {
     @apply text-3xl;
   }
+  
+  h3 {
+    @apply text-xl;
+  }
 
+  blockquote,
+  dl,
+  figure,
   ol,
   ul,
   h1,
@@ -29,8 +50,24 @@
   h6,
   p,
   hr,
-  pre {
+  pre,
+  pre[class*="language-"] {
     @apply my-4;
+
+    &:first-child {
+      @apply mt-0;
+    }
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+  
+  figure {
+    @apply flex flex-col items-center p-4 border border-grey-500 rounded;
+    
+    & > figcaption {
+      @apply mt-2;
+    }
   }
 
   pre {

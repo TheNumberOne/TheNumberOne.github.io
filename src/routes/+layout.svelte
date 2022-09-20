@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
   import '../app.css'
 
   const navItems = [
@@ -8,11 +8,11 @@
   ]
 </script>
 
-<header class="max-w-screen-md mx-auto px-4">
+<header class='max-w-screen-md mx-auto px-4 my-4'>
   <nav>
-    <ul class="list-none mx-0">
+    <ul class='list-none mx-0'>
       {#each navItems as [path, name], i}
-        <li class="inline">
+        <li class='inline'>
           {#if i !== 0}
             <span aria-hidden="true"> | </span>
           {/if}
@@ -23,6 +23,6 @@
   </nav>
 </header>
 
-<main class="max-w-screen-md mx-auto px-4">
+<main class='max-w-screen-md mx-auto px-4 my-4'>
   <slot />
 </main>

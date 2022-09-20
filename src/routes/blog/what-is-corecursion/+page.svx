@@ -1,0 +1,221 @@
+---
+title: What is Corecursion?
+date: 2022-09-20
+description: A description of corecursion from a layperson's perspective.
+---
+
+<script lang="ts">
+  import calkinWilfTree from './calkinWilfTree.svg'
+</script>
+
+## A Simple Example
+
+Corecursion is similar to recursion. As we explore corecursion, we will also explore recursion beside it.
+We will start with a simple example of both recursion and corecursion.
+
+```haskell
+-- corecursion
+infinite a = a : infinite a
+
+-- recursion
+is_finite [] = True
+is_finite (a : rest) = is_finite rest
+```
+
+Both of these functions are self-referential. I.e. they are defined using themselves.
+However, there is a difference in what these functions are doing. The corecursive
+function constructs data, while the recursive function deconstructs data.
+
+At first glance, there doesn't seem to be a need to distinguish between recursion and corecursion.
+In most programming languages, you can freely use the two without needing to understand their differences.
+Why do we use different names for them then?
+
+## Codata
+
+In the previous example, the corecursive function created an infinitely long list.
+Most programming languages do not support infinitely long lists, or if they do they make a distinction between
+them and regular lists. Haskell, the programming language used above, is one of the few exceptions.
+If we rewrite the `infinite` function in javascript, it becomes:
+
+```js
+const infinite = (a) => [a, ...infinity(a)];
+```
+
+On calling the `infinite` function, a stackoverflow happens from too much recursion. Why can Haskell create an infinite
+list, while Javascript cannot? In Haskell, all evaluation is lazy by default.  
+This allows Haskell to not evaluate the entirety of the infinite list, but rather only as much of the list is needed
+for evaluations that depend on it.
+
+Because of Haskell's lazy evaluation, there is a difference between the data types in Haskell and data types in other
+programming languages. In Haskell, a list is defined as:
+> A list is either empty or the concatenation of a value with a list.  
+> An infinite number of concatenations is allowed.
+
+In a non-lazy language, a list might be defined as:
+> A list is either empty or the concatenation of a value with a list.  
+> Every list must be constructed with a finite number of steps.
+
+This difference in the definition of a list prompts a distinction between these two kinds of data. 
+
+<dl>
+  <dt>Codata</dt>
+  <dd>Any type that allows instances to be constructed in an infinite number of steps.</dd>
+  <dt>Data</dt>
+  <dd>Any type that requires instances to be constructed in a finite number of steps.</dd>
+</dl>
+
+### Examples
+
+Array types in most programming languages are data because they cannot be infinitely long:
+
+```python
+# python
+data = [1, 2, 3]
+```
+
+Java streams are codata.
+
+```java
+IntStream codata = IntStream.generate(() -> 1);
+```
+
+Integers are data in all programming languages I have encountered, since they cannot be infinity.
+
+All recursive data types in Haskell are codata.
+
+```haskell
+data Tree a = Node [Tree a] a
+
+codata = Node [codata, Node [codata, codata, codata] 2] 1
+--       ---1---
+--      /       \\
+--     1       --2--
+--    / \\     /  |  \\
+--   1   2   1   1   1
+--  /|  /|\\  |\\  |\\  |\\
+-- 1 2 1 1 1 1 2 1 2 1 2
+-- .....................
+```
+
+The [Calkin-Wilf tree](https://en.wikipedia.org/wiki/Calkin%E2%80%93Wilf_tree) is an example of a codata tree.
+The tree contains every positive rational number.
+We can construct it in Haskell like so:
+
+```haskell
+import Data.Ratio
+
+data Tree a = Node [Tree a] a
+
+-- The % operator is used to create rational numbers, rather than to find the remainder.
+calkin_wilf_subtree :: Rational -> Tree Rational
+calkin_wilf_subtree root = Node [calkin_wilf_subtree (p % (p + q)), calkin_wilf_subtree ((p + q) % p)] root
+  where p = numerator root
+        q = denominator root
+
+calkin_wilf_tree = calkin_wilf_subtree (1 % 1)
+```
+
+Similar code in Python might be:
+
+```python
+from __future__ import annotations
+from typing import TypeVar, Generic, Iterable
+from dataclasses import dataclass
+from fractions import Fraction
+
+T = TypeVar('T')
+
+@dataclass
+class Tree(Generic[T]):
+  element: T
+  # using an iterable which causes Tree to be codata
+  branches: Iterable[Tree[T]]
+
+def calkin_wilf_subtree(root: Fraction) -> Tree[Fraction]:
+  p = root.numerator
+  q = root.denominator
+
+  next_roots = [Fraction(p, p + q), Fraction(p + q, q)]
+  return Tree(
+    element=root,
+    branches=(calkin_wilf_subtree(f) for f in next_roots)
+  )
+
+calkin_wilf_tree = calkin_wilf_subtree(Fraction(1, 1))
+```
+
+Here is what the Calkin Wilf Tree looks like:
+
+<figure>
+  <img src={calkinWilfTree} alt="Calkin Wilf Subtree" class="bg-white rounded-sm" width="494" height="312" />
+
+  <figcaption>
+    The first three layers of the Calkin-Wilf tree.
+    <cite>
+      <a href="https://commons.wikimedia.org/wiki/File:Calkin%E2%80%93Wilf_tree.svg">Olli Niemitalo, Proz (CalkinWilf.svg)</a>, CC0, via Wikimedia Commons
+    </cite>
+  </figcaption>
+</figure>
+
+
+## Properties of Corecursion and Codata
+
+Now that we know what corecursion and codata are, we can now begin to understand the why of distinguishing
+corecursion from recursion and codata from data. When writing recursive functions that don't get stuck in infinite loops, there are always at least two cases.
+There is at least one base case, and one recursive case. This is to ensure that the recursive function always completes.
+The Fibonacci function is a popular example of writing a recursive function in this way:
+
+```haskell
+fibonacci 0 = 1
+fibonacci 1 = 1
+fibonacci n = (fibonacci (n - 1)) + (fibonacci (n - 2))
+```
+
+In a world of codata, recursive functions are suddenly not guaranteed to complete.
+The base case might never be encountered. For example, the `fibonacci` function would fail to evaluate for a codata number
+defined as
+```haskell
+omega = omega + 1
+```
+
+This allows us to define a rule for doing recursion safely:
+
+<dl>
+  <dt>Rule of recursion</dt>
+  <dd>Recursion can only safely deconstruct data.</dd>
+  <dd>Recursion cannot safely deconstruct codata.</dd>
+</dl>
+
+Corecursion has a similar rule. Previously we noticed that in languages where most types are data and not codata,
+corecursion can result in stack overflow. This is because corecursion can create infinite values, which are valid codata
+but not valid data. This allows us to define a rule for doing corecursion safely:
+
+<dl>
+  <dt>Rule of corecursion</dt>
+  <dd>Corecursion can only safely construct codata.</dd>
+  <dd>Corecursion cannot safely construct data.</dd>
+</dl>
+
+With these rules, we can now understand why we should differentiate corecursion from recursion and codata from data.
+It is important to understand their differences so that one can follow these two rules governing their interaction.
+
+## Conclusion: Recursion with Corecursion
+
+On an end-note, it is possible to combine recursion with corecursion. Here is an example of combining recursion and corecursion to construct data from data:
+
+```python
+def range(n):
+  if n == 0:
+    return []
+  return [n - 1, ...range(n - 1)]
+```
+
+Here is an example of combining recursion and corecursion to deconstruct codata into codata:
+
+```haskell
+preorder_traversal (Node branches element) = element : (branches >>= preorder_traversal)
+```
+
+Notice that when codata and data are combined, the **Rule of recursion** and **Rule of corecursion** can be broken.
+There are still rules for applying them safely when they are combined, but the two rules we defined earlier are no
+longer applicable.

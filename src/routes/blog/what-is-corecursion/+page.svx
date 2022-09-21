@@ -1,6 +1,6 @@
 ---
 title: What is Corecursion?
-date: 2022-09-20
+date: 2022-09-21
 description: A description of corecursion from a layperson's perspective.
 ---
 

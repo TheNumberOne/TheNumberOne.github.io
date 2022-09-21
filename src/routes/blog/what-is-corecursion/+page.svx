@@ -262,14 +262,13 @@ always happens in constant time now. `a : ` defines a base case, making it primi
 guaranteed to terminate. When `numbers_from` is evaluated on the number `1`, it produces the codata list `[1, 2, 3, 4, ...]`.
 
 Corecursion has one more rule. `numbers_from` always terminates when evaluated in haskell, where lists are codata.
-But, it would fail to terminate in most programming languages where lists are data. The equivalent in python is one
+But, it would fail to terminate in most programming languages where lists are data. The equivalent in Python is one
 such case where it never terminates correctly:
 
 ```python
 # python
 from itertools import islice
 
-# python
 def numbers_from(a):
   return [a, *map(lambda x: x + 1, numbers_from(a))]
 
@@ -299,7 +298,7 @@ What can we learn from this? Similar to recursion, codata has a limitation on th
   <dd>Primitive corecursion cannot create data.</dd>
 </dl>
 
-`numbers_from` worked in Haskell and with generators in python because Haskell lists and Python
+`numbers_from` worked in Haskell and with generators in Python because Haskell lists and Python
 generators are codata. It didn't work in Python with lists because Python lists are `data`, not `codata`.
 
 With these rules, we can now understand why we should differentiate corecursion from recursion and codata from data.

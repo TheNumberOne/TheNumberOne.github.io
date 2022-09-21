@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply dark:bg-neutral-900 dark:text-gray-300;
+    @apply dark:bg-neutral-900 dark:text-gray-300 bg-white text-grey-900;
   }
 
   a {
@@ -15,6 +15,14 @@
 
   blockquote {
     @apply p-4 border-l-2 border-red-600 dark:bg-neutral-800 bg-neutral-100 rounded-r;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+  
+  :not(pre) > code {
+    @apply bg-zinc-800 text-gray-300 rounded px-0.5 py-px dark:bg-zinc-200 dark:text-grey-700;
   }
   
   dd {

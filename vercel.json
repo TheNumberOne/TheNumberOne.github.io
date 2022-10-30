@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/drafts/",
-      "destination": "https://publish.obsidian.md/server?url=thenumeral.one/drafts"
+      "destination": "https://publish.obsidian.md/serve?url=thenumeral.one/drafts"
     },
     {
       "source": "/drafts/:path*",
-      "destination": "https://publish.obsidian.md/server?url=thenumeral.one/drafts/:path*"
+      "destination": "https://publish.obsidian.md/serve?url=thenumeral.one/drafts/:path*"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/drafts/",
+      "destination": "https://publish.obsidian.md/server?url=thenumeral.one/drafts"
+    },
+    {
+      "source": "/drafts/:path*",
+      "destination": "https://publish.obsidian.md/server?url=thenumeral.one/drafts/:path*"
+    }
+  ]
+}

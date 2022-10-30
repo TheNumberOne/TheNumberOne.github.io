@@ -12,4 +12,5 @@ const config: UserConfig = {
   ]
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default config

@@ -14,3 +14,4 @@ Hi, this is a list of project ideas that I have had that I haven't started on ye
 * Nix syntax highlighting for Vim.
 * Figure out how to mod Leaf Blower Revolution.
 * Figure out how to TAS Leaf Blower Revolution.
+* Implementation of Web Mention Protocol in a fast programming language, such as Rust, C, or C++.

@@ -1,14 +1,36 @@
+@import "prism-themes/themes/prism-a11y-dark.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-    @apply dark:bg-neutral-900 dark:text-gray-300;
+    @apply dark:bg-neutral-900 dark:text-gray-300 bg-white text-grey-900;
   }
 
   a {
     @apply text-blue-600 underline dark:text-blue-400;
+  }
+
+  blockquote {
+    @apply p-4 border-l-2 border-red-600 dark:bg-neutral-800 bg-neutral-100 rounded-r;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+  
+  :not(pre) > code {
+    @apply bg-zinc-800 text-gray-300 rounded px-0.5 py-px dark:bg-zinc-200 dark:text-grey-700;
+  }
+  
+  dd {
+    @apply ml-4;
+  }
+  
+  dt {
+    @apply font-bold;
   }
 
   h1 {
@@ -18,7 +40,14 @@
   h2 {
     @apply text-3xl;
   }
+  
+  h3 {
+    @apply text-xl;
+  }
 
+  blockquote,
+  dl,
+  figure,
   ol,
   ul,
   h1,
@@ -29,8 +58,24 @@
   h6,
   p,
   hr,
-  pre {
+  pre,
+  pre[class*="language-"] {
     @apply my-4;
+
+    &:first-child {
+      @apply mt-0;
+    }
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+  
+  figure {
+    @apply flex flex-col items-center p-4 border border-grey-500 rounded;
+    
+    & > figcaption {
+      @apply mt-2;
+    }
   }
 
   pre {

@@ -17,7 +17,7 @@
 </script>
 
 <Base {title} {description}>
-  <article>
+  <article class='my-4'>
     <h1>
       {title}
     </h1>
